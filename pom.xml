@@ -18,7 +18,7 @@
 
     <groupId>dxy.springframework</groupId>
     <artifactId>ad-spring-pet-clinic</artifactId>
-    <version>0.0.1</version>
+    <version>0.0.2-SNAPSHOT</version>
     <name>ad-spring-pet-clinic</name>
     <description>my version of spring pet clinic</description>
 
@@ -48,7 +48,7 @@
 
     <scm>
         <developerConnection>scm:git:https://github.com/xy-du/ad-spring-pet-clinic.git</developerConnection>
-      <tag>ad-spring-pet-clinic-0.0.1</tag>
+      <tag>HEAD</tag>
   </scm>
 
 </project>
