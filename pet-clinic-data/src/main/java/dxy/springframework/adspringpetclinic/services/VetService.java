@@ -9,7 +9,7 @@ import java.util.Set;
  * @date 2020/10/09
  */
 public interface VetService {
-    Vet findById(long id);
+    Vet findById(Long id);
 
     Vet save(Vet vet);
 
