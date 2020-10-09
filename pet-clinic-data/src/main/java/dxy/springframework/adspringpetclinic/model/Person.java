@@ -4,7 +4,7 @@ package dxy.springframework.adspringpetclinic.model;
  * @author AD
  * @date 2020/10/09
  */
-public class Person {
+public class Person extends BaseEntity{
     private String firstName;
     private String lastName;
 
