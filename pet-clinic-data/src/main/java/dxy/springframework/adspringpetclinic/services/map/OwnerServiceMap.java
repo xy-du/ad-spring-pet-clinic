@@ -1,0 +1,37 @@
+package dxy.springframework.adspringpetclinic.services.map;
+
+import dxy.springframework.adspringpetclinic.model.Owner;
+import dxy.springframework.adspringpetclinic.services.CrudService;
+
+import java.util.Set;
+
+/**
+ * @author AD
+ * @date 2020/10/10
+ */
+public class OwnerServiceMap extends AbstractMapService<Owner,Long> implements CrudService<Owner,Long> {
+    @Override
+    public Set<Owner> findAll() {
+        return super.findAll();
+    }
+
+    @Override
+    public void deleteById(Long id) {
+        super.deleteById(id);
+    }
+
+    @Override
+    public void delete(Owner object) {
+        super.delete(object);
+    }
+
+    @Override
+    public Owner save(Owner object) {
+        return super.save(object.getId(),object);
+    }
+
+    @Override
+    public Owner findById(Long id) {
+        return null;
+    }
+}
