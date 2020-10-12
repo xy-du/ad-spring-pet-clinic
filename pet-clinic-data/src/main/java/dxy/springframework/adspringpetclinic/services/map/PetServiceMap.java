@@ -2,6 +2,7 @@ package dxy.springframework.adspringpetclinic.services.map;
 
 import dxy.springframework.adspringpetclinic.model.Pet;
 import dxy.springframework.adspringpetclinic.services.PetService;
+import org.springframework.stereotype.Service;
 
 import java.util.Set;
 
@@ -9,6 +10,7 @@ import java.util.Set;
  * @author AD
  * @date 2020/10/10
  */
+@Service
 public class PetServiceMap extends AbstractMapService<Pet,Long> implements PetService {
     @Override
     public Set<Pet> findAll() {
