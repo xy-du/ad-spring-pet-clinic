@@ -1,7 +1,7 @@
 package dxy.springframework.adspringpetclinic.services.map;
 
 import dxy.springframework.adspringpetclinic.model.Vet;
-import dxy.springframework.adspringpetclinic.services.CrudService;
+import dxy.springframework.adspringpetclinic.services.VetService;
 
 import java.util.Set;
 
@@ -9,7 +9,7 @@ import java.util.Set;
  * @author AD
  * @date 2020/10/10
  */
-public class VetServiceMap extends AbstractMapService<Vet, Long> implements CrudService<Vet, Long> {
+public class VetServiceMap extends AbstractMapService<Vet, Long> implements VetService {
     @Override
     public Set<Vet> findAll() {
         return super.findAll();

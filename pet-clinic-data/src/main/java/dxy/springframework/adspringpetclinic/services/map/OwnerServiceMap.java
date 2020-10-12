@@ -1,7 +1,7 @@
 package dxy.springframework.adspringpetclinic.services.map;
 
 import dxy.springframework.adspringpetclinic.model.Owner;
-import dxy.springframework.adspringpetclinic.services.CrudService;
+import dxy.springframework.adspringpetclinic.services.OwnerService;
 
 import java.util.Set;
 
@@ -9,7 +9,13 @@ import java.util.Set;
  * @author AD
  * @date 2020/10/10
  */
-public class OwnerServiceMap extends AbstractMapService<Owner,Long> implements CrudService<Owner,Long> {
+public class OwnerServiceMap extends AbstractMapService<Owner, Long> implements OwnerService {
+
+    @Override
+    public Owner findByLastName(String lastName) {
+        return null;
+    }
+
     @Override
     public Set<Owner> findAll() {
         return super.findAll();
@@ -27,11 +33,13 @@ public class OwnerServiceMap extends AbstractMapService<Owner,Long> implements C
 
     @Override
     public Owner save(Owner object) {
-        return super.save(object.getId(),object);
+        return super.save(object.getId(), object);
     }
 
     @Override
     public Owner findById(Long id) {
         return null;
     }
+
+
 }
