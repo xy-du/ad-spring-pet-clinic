@@ -1,7 +1,7 @@
 package dxy.springframework.adspringpetclinic.services.map;
 
 import dxy.springframework.adspringpetclinic.model.Speciality;
-import dxy.springframework.adspringpetclinic.services.SpecialitiesService;
+import dxy.springframework.adspringpetclinic.services.SpecialityService;
 
 import java.util.Set;
 
@@ -9,7 +9,7 @@ import java.util.Set;
  * @author AD
  * @date 2020/10/16
  */
-public class SpecialitiesMapService extends AbstractMapService<Speciality,Long> implements SpecialitiesService {
+public class SpecialityMapService extends AbstractMapService<Speciality,Long> implements SpecialityService {
     @Override
     public Set<Speciality> findAll() {
         return super.findAll();
