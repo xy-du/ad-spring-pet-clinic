@@ -1,7 +1,11 @@
 package dxy.springframework.adspringpetclinic.services.map;
 
 import dxy.springframework.adspringpetclinic.model.Owner;
+import dxy.springframework.adspringpetclinic.model.Pet;
+import dxy.springframework.adspringpetclinic.model.PetType;
 import dxy.springframework.adspringpetclinic.services.OwnerService;
+import dxy.springframework.adspringpetclinic.services.PetService;
+import dxy.springframework.adspringpetclinic.services.PetTypeService;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;
@@ -12,6 +16,14 @@ import java.util.Set;
  */
 @Service
 public class OwnerServiceMap extends AbstractMapService<Owner, Long> implements OwnerService {
+
+    private final PetTypeService petTypeService;
+    private final PetService petService;
+
+    public OwnerServiceMap(PetTypeService petTypeService, PetService petService) {
+        this.petTypeService = petTypeService;
+        this.petService = petService;
+    }
 
     @Override
     public Owner findByLastName(String lastName) {
@@ -35,7 +47,28 @@ public class OwnerServiceMap extends AbstractMapService<Owner, Long> implements 
 
     @Override
     public Owner save(Owner object) {
-        return super.save(object);
+        if(object!=null){
+            Set<Pet> pets=object.getPets();
+            if(pets!=null&&pets.size()!=0){
+                pets.forEach(pet -> {
+                    PetType petType=pet.getPetType();
+                    if(petType!=null){
+                        if(petType.getId()==null){
+                            pet.setPetType(petTypeService.save(petType));
+                        }
+                    }else{
+                        throw new RuntimeException("PetType Required");
+                    }
+                    if(pet.getId()==null){
+                        Pet savingPet=petService.save(pet);
+                        savingPet.setId(savingPet.getId());
+                    }
+                });
+            }
+            return super.save(object);
+        }else{
+            return null;
+        }
     }
 
     @Override
