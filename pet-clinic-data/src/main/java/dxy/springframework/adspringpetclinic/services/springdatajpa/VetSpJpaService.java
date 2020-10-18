@@ -14,7 +14,7 @@ import java.util.Set;
  * @date 2020/10/18
  */
 @Service
-@Profile(("springdatajpa"))
+@Profile("springdatajpa")
 public class VetSpJpaService implements VetService {
     private final VetRepository vetRepository;
 

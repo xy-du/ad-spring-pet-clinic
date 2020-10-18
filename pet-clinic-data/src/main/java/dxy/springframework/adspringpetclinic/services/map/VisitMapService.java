@@ -2,6 +2,7 @@ package dxy.springframework.adspringpetclinic.services.map;
 
 import dxy.springframework.adspringpetclinic.model.Visit;
 import dxy.springframework.adspringpetclinic.services.VisitService;
+import org.springframework.stereotype.Service;
 
 import java.util.Set;
 
@@ -9,6 +10,7 @@ import java.util.Set;
  * @author AD
  * @date 2020/10/18
  */
+@Service
 public class VisitMapService extends AbstractMapService<Visit,Long> implements VisitService {
 
     @Override

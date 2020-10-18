@@ -1,10 +1,7 @@
 package dxy.springframework.adspringpetclinic.bootstrap;
 
 import dxy.springframework.adspringpetclinic.model.*;
-import dxy.springframework.adspringpetclinic.services.OwnerService;
-import dxy.springframework.adspringpetclinic.services.PetTypeService;
-import dxy.springframework.adspringpetclinic.services.SpecialityService;
-import dxy.springframework.adspringpetclinic.services.VetService;
+import dxy.springframework.adspringpetclinic.services.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -20,12 +17,15 @@ public class DataLoader implements CommandLineRunner {
     private final VetService vetService;
     private final PetTypeService petTypeService;
     private final SpecialityService specialityService;
+    private final VisitService visitService;
 
-    public DataLoader(OwnerService ownerService, VetService vetService, PetTypeService petTypeService, SpecialityService specialityService) {
+    public DataLoader(OwnerService ownerService, VetService vetService, PetTypeService petTypeService,
+                      SpecialityService specialityService, VisitService visitService) {
         this.ownerService = ownerService;
         this.vetService = vetService;
         this.petTypeService = petTypeService;
         this.specialityService = specialityService;
+        this.visitService=visitService;
     }
 
     @Override
@@ -36,6 +36,9 @@ public class DataLoader implements CommandLineRunner {
     }
 
     private void loadData() {
+
+        System.out.println("Loaded Owners and Pets....");
+
         PetType dog = new PetType();
         dog.setName("Dog");
         PetType dogType = petTypeService.save(dog);
@@ -77,7 +80,7 @@ public class DataLoader implements CommandLineRunner {
 
         ownerService.save(owner2);
 
-        System.out.println("Loaded Owners....");
+        System.out.println("Loaded Vets and Specialities....");
 
         Speciality surgerySpec = new Speciality();
         surgerySpec.setDescription("surgery");
@@ -90,6 +93,7 @@ public class DataLoader implements CommandLineRunner {
         Speciality dentistrySpec = new Speciality();
         dentistrySpec.setDescription("dentistry");
         specialityService.save(dentistrySpec);
+
 
 
         Vet vet1 = new Vet();
@@ -106,6 +110,13 @@ public class DataLoader implements CommandLineRunner {
 
         vetService.save(vet2);
 
-        System.out.println("Loaded Vets....");
+        System.out.println("Load Visit....");
+
+        Visit catVisit = new Visit();
+        catVisit.setPet(fionasCat);
+        catVisit.setDate(LocalDate.now());
+        catVisit.setDescription("Sneezy Kitty");
+
+        visitService.save(catVisit);
     }
 }
