@@ -6,6 +6,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
+import java.util.HashSet;
 
 /**
  * @author AD
@@ -25,7 +26,7 @@ public class DataLoader implements CommandLineRunner {
         this.vetService = vetService;
         this.petTypeService = petTypeService;
         this.specialityService = specialityService;
-        this.visitService=visitService;
+        this.visitService = visitService;
     }
 
     @Override
@@ -47,12 +48,21 @@ public class DataLoader implements CommandLineRunner {
         cat.setName("Cat");
         PetType catType = petTypeService.save(cat);
 
-        Owner owner1 = new Owner();
-        owner1.setFirstName("Michael");
-        owner1.setLastName("Weston");
-        owner1.setAddress("123 Brickerel");
-        owner1.setCity("Miami");
-        owner1.setTelephone("1231231234");
+
+        /*
+         add @Builder on the Owner entity can give you this approach, but the firstName and lastName
+         are inherited from parent class and require special treatment about the Constructor method.
+         for details, have a look at Entity Class Owner, Person, BaseEntity.
+         */
+        Owner owner1 = Owner.builder().firstName("Michael").lastName("Weston").address("123 Brickerel").city("Miami")
+                .telephone("1231231234").pets(new HashSet<>()).build();
+
+//        Owner owner1 = new Owner();
+//        owner1.setFirstName("Michael");
+//        owner1.setLastName("Weston");
+//        owner1.setAddress("123 Brickerel");
+//        owner1.setCity("Miami");
+//        owner1.setTelephone("1231231234");
 
         Pet mikeDog = new Pet();
         mikeDog.setPetType(dogType);
@@ -93,7 +103,6 @@ public class DataLoader implements CommandLineRunner {
         Speciality dentistrySpec = new Speciality();
         dentistrySpec.setDescription("dentistry");
         specialityService.save(dentistrySpec);
-
 
 
         Vet vet1 = new Vet();

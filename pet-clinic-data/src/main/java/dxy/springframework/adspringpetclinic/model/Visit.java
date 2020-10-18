@@ -1,5 +1,7 @@
 package dxy.springframework.adspringpetclinic.model;
 
+import lombok.*;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 
@@ -7,7 +9,11 @@ import java.time.LocalDate;
  * @author AD
  * @date 2020/10/15
  */
-
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Entity
 @Table(name = "visit")
 public class Visit extends BaseEntity {
