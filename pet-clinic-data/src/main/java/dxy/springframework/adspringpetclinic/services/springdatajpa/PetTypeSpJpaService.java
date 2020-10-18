@@ -1,8 +1,8 @@
 package dxy.springframework.adspringpetclinic.services.springdatajpa;
 
-import dxy.springframework.adspringpetclinic.model.Pet;
-import dxy.springframework.adspringpetclinic.repositories.PetRepository;
-import dxy.springframework.adspringpetclinic.services.PetService;
+import dxy.springframework.adspringpetclinic.model.PetType;
+import dxy.springframework.adspringpetclinic.repositories.PetTypeRepository;
+import dxy.springframework.adspringpetclinic.services.PetTypeService;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
@@ -16,38 +16,38 @@ import java.util.Set;
 
 @Service
 @Profile("springdatajpa")
-public class PetTypeSpJpaService implements PetService {
+public class PetTypeSpJpaService implements PetTypeService {
 
-    private final PetRepository petRepository;
+    private final PetTypeRepository petTypeRepository;
 
-    public PetTypeSpJpaService(PetRepository petRepository) {
-        this.petRepository = petRepository;
+    public PetTypeSpJpaService(PetTypeRepository petTypeRepository) {
+        this.petTypeRepository = petTypeRepository;
     }
 
     @Override
-    public Set<Pet> findAll() {
-        Set<Pet> pets=new HashSet<>();
-        petRepository.findAll().forEach(pets::add);
-        return pets;
+    public Set<PetType> findAll() {
+        Set<PetType> petTypes=new HashSet<>();
+        petTypeRepository.findAll().forEach(petTypes::add);
+        return petTypes;
     }
 
     @Override
-    public Pet findById(Long aLong) {
-        return petRepository.findById(aLong).orElse(null);
+    public PetType findById(Long aLong) {
+        return petTypeRepository.findById(aLong).orElse(null);
     }
 
     @Override
-    public Pet save(Pet object) {
-        return petRepository.save(object);
+    public PetType save(PetType object) {
+        return petTypeRepository.save(object);
     }
 
     @Override
-    public void delete(Pet object) {
-        petRepository.delete(object);
+    public void delete(PetType object) {
+        petTypeRepository.delete(object);
     }
 
     @Override
     public void deleteById(Long aLong) {
-        petRepository.deleteById(aLong);
+        petTypeRepository.deleteById(aLong);
     }
 }
