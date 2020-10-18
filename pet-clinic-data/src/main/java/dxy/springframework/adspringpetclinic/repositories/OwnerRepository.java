@@ -8,4 +8,5 @@ import org.springframework.data.repository.CrudRepository;
  * @date 2020/10/18
  */
 public interface OwnerRepository extends CrudRepository<Owner,Long> {
+    Owner findByLastName(String lastName);
 }
