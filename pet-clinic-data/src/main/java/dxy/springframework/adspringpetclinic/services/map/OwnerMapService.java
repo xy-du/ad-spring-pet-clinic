@@ -16,7 +16,7 @@ import java.util.Set;
  * @date 2020/10/10
  */
 @Service
-@Profile({"default","map"})
+@Profile({"default", "map"})
 public class OwnerMapService extends AbstractMapService<Owner, Long> implements OwnerService {
 
     private final PetTypeService petTypeService;
@@ -29,7 +29,11 @@ public class OwnerMapService extends AbstractMapService<Owner, Long> implements 
 
     @Override
     public Owner findByLastName(String lastName) {
-        return null;
+        return this.findAll()
+                .stream()
+                .filter(owner -> owner.getLastName().equalsIgnoreCase(lastName))
+                .findFirst()
+                .orElse(null);
     }
 
     @Override
@@ -49,26 +53,26 @@ public class OwnerMapService extends AbstractMapService<Owner, Long> implements 
 
     @Override
     public Owner save(Owner object) {
-        if(object!=null){
-            Set<Pet> pets=object.getPets();
-            if(pets!=null&&pets.size()!=0){
+        if (object != null) {
+            Set<Pet> pets = object.getPets();
+            if (pets != null && pets.size() != 0) {
                 pets.forEach(pet -> {
-                    PetType petType=pet.getPetType();
-                    if(petType!=null){
-                        if(petType.getId()==null){
+                    PetType petType = pet.getPetType();
+                    if (petType != null) {
+                        if (petType.getId() == null) {
                             pet.setPetType(petTypeService.save(petType));
                         }
-                    }else{
+                    } else {
                         throw new RuntimeException("PetType Required");
                     }
-                    if(pet.getId()==null){
-                        Pet savingPet=petService.save(pet);
+                    if (pet.getId() == null) {
+                        Pet savingPet = petService.save(pet);
                         savingPet.setId(savingPet.getId());
                     }
                 });
             }
             return super.save(object);
-        }else{
+        } else {
             return null;
         }
     }
