@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -26,7 +27,13 @@ public class Pet extends BaseEntity {
         this.petType = petType;
         this.owner = owner;
         this.birthDate = birthDate;
-        this.visits = visits;
+
+        //it has been initialized when the object was created using new HashSet
+        //but without this logic, when we use build() method to build this object, the visits passed in is null,
+        //which will make this local visits null too. and then there will be NPE problem somewhere.
+        if(visits!=null) {
+            this.visits = visits;
+        }
     }
 
     @Column(name = "name")
@@ -44,5 +51,10 @@ public class Pet extends BaseEntity {
     private LocalDate birthDate;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "pet")
-    private Set<Visit> visits;
+    private Set<Visit> visits=new HashSet<>();
+
+    public void addVisit(Visit visit){
+        visits.add(visit);
+        visit.setPet(this);
+    }
 }
