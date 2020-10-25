@@ -62,13 +62,13 @@ public class OwnerController {
 
         if (ownerList.isEmpty()) {
             bindingResult.rejectValue("lastName", "notFound", "not found");
-            return "/owners/findOwners";
+            return "owners/findOwners";
         } else if (ownerList.size() == 1) {
             Owner ownerFound = ownerList.get(0);
             return "redirect:/owners/" + ownerFound.getId();
         } else {
             model.addAttribute("selections", ownerList);
-            return "/owners/ownerList";
+            return "owners/ownersList";
         }
 
     }
